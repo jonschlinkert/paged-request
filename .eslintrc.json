@@ -6,6 +6,10 @@
     "mocha": true
   },
 
+  "parserOptions": {
+    "ecmaVersion": 8
+  },
+
   "globals": {
     "document": false,
     "navigator": false,

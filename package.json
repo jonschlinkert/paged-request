@@ -29,8 +29,8 @@
   },
   "keywords": [
     "get",
-    "paginated",
     "paged",
+    "paginated",
     "request"
   ],
   "verb": {
@@ -44,8 +44,8 @@
     ],
     "related": {
       "list": [
-        "github-base",
         "gists",
+        "github-base",
         "repos"
       ]
     },
