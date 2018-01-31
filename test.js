@@ -27,4 +27,17 @@ describe('paged-request', function() {
       })
       .catch(cb);
   });
+
+  it('should keep the history of `hrefs`', function(cb) {
+    request('https://www.smashingmagazine.com/category/css', {}, next(3))
+      .then(acc => {
+        assert.deepEqual(acc.hrefs, [
+          'https://www.smashingmagazine.com/category/css',
+          'https://www.smashingmagazine.com/category/css/page/2/',
+          'https://www.smashingmagazine.com/category/css/page/3/'
+        ]);
+        cb();
+      })
+      .catch(cb);
+  });
 });
