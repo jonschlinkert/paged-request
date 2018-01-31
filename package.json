@@ -1,7 +1,7 @@
 {
   "name": "paged-request",
   "description": "Simplified requests for paged (paginated) content.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "homepage": "https://github.com/jonschlinkert/paged-request",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/paged-request",
@@ -28,6 +28,8 @@
     "mocha": "^3.5.3"
   },
   "keywords": [
+    "get",
+    "paginated",
     "paged",
     "request"
   ],
@@ -40,6 +42,13 @@
     "plugins": [
       "gulp-format-md"
     ],
+    "related": {
+      "list": [
+        "github-base",
+        "gists",
+        "repos"
+      ]
+    },
     "lint": {
       "reflinks": true
     }
