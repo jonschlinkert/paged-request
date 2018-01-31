@@ -14,7 +14,6 @@ module.exports = async function(url, options, next) {
 
   const opts = Object.assign({}, options);
   const acc = { url, options: opts, pages: [], hrefs: [] };
-  const orig = url;
   let prev;
   let res;
 
@@ -22,7 +21,7 @@ module.exports = async function(url, options, next) {
     prev = url;
     acc.hrefs.push(url);
     res = await needle('get', url, opts);
-    url = await next(orig, res, acc);
+    url = await next(acc.url, res, acc);
     acc.pages.push(res);
   }
 
