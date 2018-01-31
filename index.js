@@ -20,7 +20,7 @@ module.exports = async function(url, options, next) {
   while (url && typeof url === 'string' && prev !== url) {
     prev = url;
     acc.hrefs.push(url);
-    res = await needle('get', url, opts);
+    res = await needle('get', url, null, opts);
     url = await next(acc.url, res, acc);
     acc.pages.push(res);
   }
