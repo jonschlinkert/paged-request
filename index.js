@@ -1,17 +1,27 @@
 'use strict';
 
-const url = require('url');
 const needle = require('needle');
 
-module.expots = async function paged(href, options, next) {
-  const opts = Object.assign({}, url.parse(href), options);
-  const acc = { href, options: opts, pages: [], hrefs: [] };
+module.exports = async function(url, options, next) {
+  if (typeof url !== 'string') {
+    return Promise.reject(new TypeError('expected "url" to be a string'));
+  }
+
+  if (typeof options === 'function') {
+    next = options;
+    options = null;
+  }
+
+  const opts = Object.assign({}, options);
+  const acc = { url, options: opts, pages: [], hrefs: [] };
+  let prev;
   let res;
 
-  while (typeof href === 'string' && acc.hrefs.indexOf(href) === -1) {
-    acc.hrefs.push(href);
-    res = await needle('get', href, opts);
-    href = await next(res, acc);
+  while (url && typeof url === 'string' && prev !== url) {
+    prev = url;
+    acc.hrefs.push(url);
+    res = await needle('get', url, opts);
+    url = await next(url, res, acc);
     acc.pages.push(res);
   }
 
