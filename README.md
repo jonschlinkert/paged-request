@@ -14,7 +14,7 @@ $ npm install --save paged-request
 
 ## Usage
 
-This library recursively calls [needle's](https://github.com/tomas/needle#needlemethod-url-data-options-callback--20x) `.get` method as long as the user-provide `next()` function returns a string (the next url to get). See [an example](#example).
+This library recursively calls [needle's](https://github.com/tomas/needle#needlemethod-url-data-options-callback--20x) `.get` method as long as the user-provided `next()` function returns a string (the next url to get). See [an example](#example).
 
 **Example**
 
