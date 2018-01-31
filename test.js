@@ -17,6 +17,8 @@ function next(n) {
 }
 
 describe('paged-request', function() {
+  this.timeout(20000);
+
   it('should make a request for paged content', function(cb) {
     request('https://www.smashingmagazine.com/category/css', {}, next(2))
       .then(acc => {
