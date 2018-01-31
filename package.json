@@ -1,0 +1,42 @@
+{
+  "name": "paged-request",
+  "description": "Paginated requests made simple.",
+  "version": "0.1.0",
+  "homepage": "https://github.com/jonschlinkert/paged-request",
+  "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
+  "repository": "jonschlinkert/paged-request",
+  "bugs": {
+    "url": "https://github.com/jonschlinkert/paged-request/issues"
+  },
+  "license": "MIT",
+  "files": [
+    "index.js"
+  ],
+  "main": "index.js",
+  "engines": {
+    "node": ">=8"
+  },
+  "scripts": {
+    "test": "mocha"
+  },
+  "keywords": [
+    "paged",
+    "request"
+  ],
+  "devDependencies": {
+    "gulp-format-md": "^1.0.0"
+  },
+  "verb": {
+    "toc": false,
+    "layout": "default",
+    "tasks": [
+      "readme"
+    ],
+    "plugins": [
+      "gulp-format-md"
+    ],
+    "lint": {
+      "reflinks": true
+    }
+  }
+}
