@@ -47,7 +47,11 @@
     },
     "lint": {
       "reflinks": true
-    }
+    },
+    "reflinks": [
+      "axios",
+      "needle"
+    ]
   },
   "dependencies": {
     "axios": "^0.18.0"
