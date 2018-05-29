@@ -4,12 +4,12 @@ require('mocha');
 const assert = require('assert');
 const request = require('./');
 
-function next(n) {
-  return async function(url, resp, acc) {
-    const regex = /href="\/categories\/css\/page\/(\d+)\/"/;
-    const num = (regex.exec(resp.data) || [])[1];
-    if (/^[0-9]+$/.test(num) && +num <= n) {
-      return `${url}/page/${num}/`;
+function next(limit) {
+  return async function(url, res, acc) {
+    const regex = /href=".*?\/page\/(\d+)\/"/;
+    const num = (regex.exec(res.data) || [])[1];
+    if (num && /^[0-9]+$/.test(num) && +num <= limit) {
+      return `${acc.orig}/page/${num}/`;
     }
   };
 }
@@ -34,10 +34,10 @@ describe('paged-request', function() {
       })
   });
 
-  it('should keep the history of `hrefs`', function(cb) {
+  it('should keep the history of `urls`', function(cb) {
     request('https://www.smashingmagazine.com/category/css', {}, next(3))
       .then(acc => {
-        assert.deepEqual(acc.hrefs, [
+        assert.deepEqual(acc.urls, [
           'https://www.smashingmagazine.com/category/css',
           'https://www.smashingmagazine.com/category/css/page/2/',
           'https://www.smashingmagazine.com/category/css/page/3/'

@@ -13,15 +13,12 @@ module.exports = async function(url, options, next) {
   }
 
   const opts = Object.assign({}, options);
-  const acc = { url, options, pages: [], urls: [] };
-  let prev;
+  const acc = { orig: url, options, pages: [], urls: [] };
   let res;
 
-  while (url && typeof url === 'string' && prev !== url) {
-    prev = url;
+  while (url && typeof url === 'string' && !acc.urls.includes(url)) {
     acc.urls.push(url);
     res = await axios.get(url, opts);
-    res.body = res.data; //<= backwards compatibility with 1.0
     url = await next(url, res, acc);
     acc.pages.push(res);
   }
