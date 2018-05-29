@@ -19,13 +19,9 @@
   "scripts": {
     "test": "mocha"
   },
-  "dependencies": {
-    "needle": "^2.1.1"
-  },
   "devDependencies": {
     "gulp-format-md": "^1.0.0",
-    "is-number": "^5.0.0",
-    "mocha": "^3.5.3"
+    "mocha": "^5.2.0"
   },
   "keywords": [
     "get",
@@ -52,5 +48,8 @@
     "lint": {
       "reflinks": true
     }
+  },
+  "dependencies": {
+    "axios": "^0.18.0"
   }
 }
