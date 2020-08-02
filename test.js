@@ -6,7 +6,7 @@ const request = require('./');
 
 function next(limit) {
   return async function(url, res, acc) {
-    const regex = /href=".*?\/page\/(\d+)\/"/;
+    const regex = /href=.*?\/page\/(\d+)/;
     const num = (regex.exec(res.data) || [])[1];
     if (num && /^[0-9]+$/.test(num) && +num <= limit) {
       return `${acc.orig}/page/${num}/`;
