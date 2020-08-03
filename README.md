@@ -45,7 +45,10 @@ request(url, options, next)
   - `pages` **{array}** - array of responses
   - `urls` **{array}** - array of requested urls
 
-The `next` function should return a string (the next url to get), promise or undefined.
+The `next` function should return an object with the following properties:
+  
+  - `nextUrl` **{string}** - the next url to get
+  - `nextOptions` **{object}** the options to next request. It can contains auth like JWT or basic auth, headers and more.
 
 ## Example
 
@@ -56,13 +59,22 @@ const request = require('paged-request');
 
 async function next(url, resp, acc) {
   // do stuff to check response first if necessary
-  const regex = /href="\/.*?\/(\d+)\/"/;
+  const regex = /href=.*?\/page\/(\d+)/;
   const num = (regex.exec(resp.data) || [])[1];
 
   if (num && /^[0-9]+$/.test(num) && +num <= n) {
     // use the "original" url to avoid having to reparse
     // and recreate the url each time
-    return `${acc.orig}/page/${num}/`;
+    const nextUrl = `${acc.orig}/page/${num}/`;
+    const nextOptions = {
+      headers: {
+        'Content-Type': 'text/html'
+      }
+    }
+    return {
+      nextOptions,
+      nextUrl,
+    };
   }
 }
 
@@ -77,6 +89,10 @@ request('https://www.smashingmagazine.com/category/css', {}, next)
 
 * renamed `.hrefs` to `.urls` in response object
 * now using [axios](https://github.com/axios/axios) instead of [needle](https://github.com/tomas/needle). Please see the axios documentation for API information.
+
+### v2.1
+
+* allow to pass options to next request
 
 ## About
 
@@ -127,6 +143,7 @@ You might also be interested in these projects:
 | --- | --- |
 | 8 | [jonschlinkert](https://github.com/jonschlinkert) |
 | 8 | [doowb](https://github.com/doowb) |
+| 2 | [7odri9o](https://github.com/7odri9o) |
 
 ### Author
 

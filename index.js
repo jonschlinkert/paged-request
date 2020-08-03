@@ -12,14 +12,20 @@ module.exports = async function(url, options, next) {
     options = null;
   }
 
-  const opts = Object.assign({}, options);
+  let opts = Object.assign({}, options);
   const acc = { orig: url, options, pages: [], urls: [] };
   let res;
 
   while (url && typeof url === 'string' && !acc.urls.includes(url)) {
     acc.urls.push(url);
     res = await axios.get(url, opts);
-    url = await next(url, res, acc);
+    const result = await next(url, res, acc);
+    if (result) {
+      url = result.nextUrl
+      opts = result.nextOptions
+    } else {
+      url = null
+    }
     acc.pages.push(res);
   }
 
