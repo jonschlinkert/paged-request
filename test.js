@@ -9,7 +9,16 @@ function next(limit) {
     const regex = /href=.*?\/page\/(\d+)/;
     const num = (regex.exec(res.data) || [])[1];
     if (num && /^[0-9]+$/.test(num) && +num <= limit) {
-      return `${acc.orig}/page/${num}/`;
+      const nextUrl = `${acc.orig}/page/${num}/`;
+      const nextOptions = {
+        headers: {
+          'Content-Type': 'text/html'
+        }
+      }
+      return {
+        nextOptions,
+        nextUrl,
+      };
     }
   };
 }
