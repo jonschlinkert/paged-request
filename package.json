@@ -1,7 +1,7 @@
 {
   "name": "paged-request",
   "description": "Simplified requests for paged (paginated) content.",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "homepage": "https://github.com/jonschlinkert/paged-request",
   "author": "Jon Schlinkert (https://github.com/jonschlinkert)",
   "repository": "jonschlinkert/paged-request",
